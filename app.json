@@ -1,0 +1,16 @@
+{
+    "env": {
+      "SECRET_TOKEN": {
+        "description": "A secret key for verifying the integrity of signed cookies.",
+        "generator": "secret"
+      },
+      "WEB_CONCURRENCY": "5"
+    },
+    "environments": {
+      "test": {
+        "env": {
+          "SECRET_TOKEN": "df9d91af-802a-4060-a8f1-c61960c6fedc"
+        }
+      }
+    }
+  }

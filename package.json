@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "json-server": "json-server -p 3001 --watch db.json",
+    "json-server": "json-server -p 3001 --watch public/db.json",
     "sass": "sass src/sass:src/css --watch --no-source-map"
   },
   "eslintConfig": {
@@ -55,6 +55,7 @@
     "css-loader": "^6.5.1",
     "react-dom": "^17.0.2",
     "sass": "^1.43.4",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "webpack": "^4.44.2"
   }
 }
