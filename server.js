@@ -14,7 +14,8 @@ app.use(middlewares);
 
 app.use(jsonServer.rewriter({
    '/api/*': '/$1',
-   "/*": "/$1"
+   '/verify/*': '/verify/$1',
+   '/*': '/$1'
 }))
 
 app.use(router)
