@@ -58,7 +58,6 @@
     "node": "14.x",
     "npm": "8.x"
   },
-  "proxy": "/",
   "devDependencies": {
     "sass": "^1.44.0"
   }
