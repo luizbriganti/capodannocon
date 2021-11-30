@@ -66,11 +66,9 @@ export const setUser = (user) => {
     }
   }
 
-  console.log(options)
-
   const errorMessage = "errore nel collegamento al server"
 
-  return makeReq(`${baseURL}users`, errorMessage, options)
+  return makeReq(`${baseURL}users`, errorMessage, JSON.stringify(options))
 }
 
 export const getUser = userid => {
