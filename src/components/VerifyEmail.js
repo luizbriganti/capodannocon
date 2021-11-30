@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Navigate } from 'react-router'
+import { appURL } from '../utils/extras'
 import { getUsers, verifyUser } from '../utils/network'
 export default class VerifyEmail extends Component {
 
@@ -43,7 +44,7 @@ export default class VerifyEmail extends Component {
 
         return (
             verified ? 
-            <Navigate to="/" /> :
+            <Navigate to={appURL} /> :
             (
                 error ?
                 error : 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { getUsers, hashIt, compareIt, setUser } from '../utils/network'
+import { appURL } from '../utils/extras'
 import {v4 as uuid} from 'uuid'
 import emailjs, { init } from 'emailjs-com'
 import { Navigate } from 'react-router'
@@ -63,7 +64,7 @@ export default class Login extends Component {
             username: user.username,
             email: user.email,
             sitename: 'CapodannoCON',
-            verify_url: `/verify/${user.email_verified}`
+            verify_url: `${appURL}verify/${user.email_verified}`
         }
 
         emailjs.send('service_6om229g', 'template_dy4gloo', params)

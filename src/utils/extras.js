@@ -1,6 +1,6 @@
 import { getUser, logInOutUser } from "./network"
 
-export const appURL = 'https://linebreak.it/' 
+export const appURL = 'https://capodannocon.herokuapp.com/' 
 
 export const isLoggedIn = user => {
     /*const loggedIn = localStorage.getItem('isLoggedIn')
