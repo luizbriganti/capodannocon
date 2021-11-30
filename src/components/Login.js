@@ -126,7 +126,7 @@ export default class Login extends Component {
 
         return (        
             logStatus ?
-            <Navigate to="/" /> :
+            <Navigate to={appURL} /> :
             <div className="login-register">
                 <div className="container form-wrapper">
                     <img src="logo.png" alt="capodannocon" />
