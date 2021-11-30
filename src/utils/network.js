@@ -21,7 +21,6 @@ export const getAll = () => {
 export const getUsers = () => {
   const errorMessage = 'Errore durante il download dei dati';
   const url = `${baseURL}users`
-  console.log(url)
 
   return makeReq(url, errorMessage)
 }
@@ -51,7 +50,7 @@ export const sendEventToTheServer = (event) => {
     
   const errorMessage = 'Errore nel collegamento col server';
 
-  return makeReq(`${baseURL}events`, errorMessage, options);
+  return makeReq(`${baseURL}setEvents`, errorMessage, options);
 };
 
 export const setUser = (user) => {
@@ -68,7 +67,7 @@ export const setUser = (user) => {
 
   const errorMessage = "errore nel collegamento al server"
 
-  return makeReq(`${baseURL}users`, errorMessage, options)
+  return makeReq(`${baseURL}setUsers`, errorMessage, options)
 }
 
 export const getUser = userid => {
@@ -97,7 +96,7 @@ export const verifyUser = user => {
 
   const errorMessage = "errore nel collegamento al server"
 
-  return makeReq(`${baseURL}users/${user.id}`, errorMessage, options)
+  return makeReq(`${baseURL}updateUsers/${user.id}`, errorMessage, options)
 }
 
 export const logInOutUser = user => {
@@ -112,7 +111,7 @@ export const logInOutUser = user => {
 
   const errorMessage = "Errore nel collegamento al server"
 
-  return makeReq(`${baseURL}users/${user.id}`, errorMessage, options)
+  return makeReq(`${baseURL}updateUsers/${user.id}`, errorMessage, options)
 }
 
 export const editEvent = event => {
@@ -127,7 +126,7 @@ export const editEvent = event => {
 
   const errorMessage = "Errore nel collegamento al server"
 
-  return makeReq(`${baseURL}events/${event.id}`, errorMessage, options)
+  return makeReq(`${baseURL}editEvents/${event.id}`, errorMessage, options)
 }
 
 export const deleteEventFromTheServer = (eventId) => {
@@ -141,7 +140,7 @@ export const deleteEventFromTheServer = (eventId) => {
 
   const errorMessage = "Impossibile cancellare l'elemento dal server";
 
-  const url = `${baseURL}events/${eventId}`;
+  const url = `${baseURL}deleteEvents/${eventId}`;
     
   return makeReq(url, errorMessage, options);
 }
