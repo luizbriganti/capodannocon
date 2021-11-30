@@ -66,6 +66,8 @@ export const setUser = (user) => {
     }
   }
 
+  console.log(options)
+
   const errorMessage = "errore nel collegamento al server"
 
   return makeReq(`${baseURL}users`, errorMessage, options)

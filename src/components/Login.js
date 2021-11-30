@@ -76,7 +76,7 @@ export default class Login extends Component {
 
         //const formData = new FormData() 
 
-        const user = {
+        /*const user = {
             id: uuid(), 
             username: register_username.value, 
             password: register_password.value,
@@ -85,7 +85,7 @@ export default class Login extends Component {
             email_verified: uuid(),
             created_at: new Date(), 
             updated_at: new Date()
-        }
+        }*/
 
         getUsers()
         .then(data =>  {
