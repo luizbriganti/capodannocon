@@ -57,5 +57,6 @@
     "sass": "^1.43.4",
     "style-loader": "^3.3.1",
     "webpack": "^5.64.4"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
