@@ -1,10 +1,11 @@
 /*const express = require('express');
 const path = require('path');
 const cluster = require('cluster');
-const numCPUs = require('os').cpus().length;
+const numCPUs = require('os').cpus().length;*/
 
 const isDev = process.env.NODE_ENV !== 'production';
-const PORT = process.env.PORT || 5000;
+
+/*const PORT = process.env.PORT || 5000;
 
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
@@ -46,14 +47,17 @@ const app = jsonServer.create();
 const path = require('path');
 const express = require('express');
 const middlewares = jsonServer.defaults();
-const router = jsonServer.router('react-ui/public/db.json');
-const port = process.env.PORT || 3001;
+const router = jsonServer.router('../react-ui/public/db.json');
+const port = process.env.PORT || 4000;
 
 app.use('/db', middlewares, router);
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../react-ui/build')));
 
 app.get('/*', function(req, res) {
-   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+   res.sendFile(path.join(__dirname, '../react-ui/build', 'index.html'));
 });
 
-server.listen(port);
+//server.listen(port);
+app.listen(port, function () {
+    console.error(`Node ${isDev ? 'dev server' : 'cluster worker '+process.pid}: listening on port ${port}`);
+});
