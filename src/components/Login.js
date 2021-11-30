@@ -76,7 +76,7 @@ export default class Login extends Component {
 
         //const formData = new FormData() 
 
-        /*const user = {
+        const user = {
             id: uuid(), 
             username: register_username.value, 
             password: register_password.value,
@@ -85,7 +85,7 @@ export default class Login extends Component {
             email_verified: uuid(),
             created_at: new Date(), 
             updated_at: new Date()
-        }*/
+        }
 
         getUsers()
         .then(data =>  {
@@ -96,7 +96,7 @@ export default class Login extends Component {
                 hashIt(register_password.value)
                 .then(data => this.setState({hashedPass: data}))
                 .then(() => {
-                    const user = {
+                    /*const user = {
                         id: uuid(), 
                         username: register_username.value, 
                         password: this.state.hashedPass, 
@@ -105,10 +105,12 @@ export default class Login extends Component {
                         email_verified: uuid(),
                         created_at: new Date(), 
                         updated_at: new Date()
-                    }
+                    }*/
+
+                    regUser = {...user, password: this.state.hashedPass}
         
-                    setUser(user)
-                    .then(() => this.sendEmail(user))
+                    setUser(regUser)
+                    .then(() => this.sendEmail(regUser))
                     .then(() => this.setState({emailSent: true}))
                 })
             } else {
