@@ -5,6 +5,8 @@ const baseURL = "/api/";
 export const makeReq = async (url, errorMessage = '', options = {}) => {
   return fetch(url, options)
     .then(response => {
+      console.log(options, response)
+
       if (response.ok) {
         return response.json();
       } else {
@@ -68,7 +70,7 @@ export const setUser = (user) => {
 
   const errorMessage = "errore nel collegamento al server"
 
-  return makeReq(`${baseURL}users`, errorMessage, JSON.stringify(options))
+  return makeReq(`${baseURL}users`, errorMessage, options)
 }
 
 export const getUser = userid => {
