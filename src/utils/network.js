@@ -5,8 +5,6 @@ const baseURL = "/api/";
 export const makeReq = async (url, errorMessage = '', options = {}) => {
   return fetch(url, options)
     .then(response => {
-      console.log(options, response)
-
       if (response.ok) {
         return response.json();
       } else {
@@ -23,7 +21,6 @@ export const getAll = () => {
 export const getUsers = () => {
   const errorMessage = 'Errore durante il download dei dati';
   const url = `${baseURL}users`
-  console.log(url)
 
   return makeReq(url, errorMessage)
 }
@@ -63,9 +60,7 @@ export const setUser = (user) => {
       'Content-type': 'application/json',
       'Accept': 'application/json'
     },
-    body: {
-      user: JSON.stringify(user)
-    }
+    body: JSON.stringify(user)
   }
 
   const errorMessage = "errore nel collegamento al server"
