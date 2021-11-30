@@ -15,6 +15,7 @@ app.use(jsonServer.rewriter({
    '/api/*': '/$1'
 }))
 app.use(router)
+
 app.listen(port, () => {
    console.log('Server is running')
 })
