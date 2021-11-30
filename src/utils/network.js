@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-const baseURL = "/db/";
+const baseURL = "/api/";
 
 export const makeReq = async (url, errorMessage = '', options = {}) => {
   return fetch(url, options)
