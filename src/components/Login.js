@@ -107,7 +107,7 @@ export default class Login extends Component {
                         updated_at: new Date()
                     }*/
 
-                    regUser = {...user, password: this.state.hashedPass}
+                    const regUser = {...user, password: this.state.hashedPass}
         
                     setUser(regUser)
                     .then(() => this.sendEmail(regUser))
