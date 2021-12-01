@@ -31,7 +31,7 @@ const port = process.env.PORT || 8000;
 
 const server = express()
 
-const middlewares = jsonServer.defaults(
+/*const middlewares = jsonServer.defaults(
    {
       static: './build'
    }
@@ -40,7 +40,7 @@ server.use('/api', middlewares)
 
 server.use(jsonServer.rewriter({   
    '/api/*': '/$1'
-}))
+}))*/
 
 server.use('/api', jsonServer.router('db.json'));
 
