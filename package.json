@@ -2,6 +2,7 @@
   "name": "capodannocon",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://capodannocon.herokuapp.com",
   "dependencies": {
     "@mdi/js": "^6.5.95",
     "@mdi/react": "^1.5.0",
