@@ -1,5 +1,3 @@
-import path from 'path'
-
 const jsonServer = require('json-server');
 const app = jsonServer.create();
 //const path = require('path');
