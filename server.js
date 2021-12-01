@@ -1,4 +1,3 @@
-import express from 'express'
 import path from 'path'
 
 const jsonServer = require('json-server');
@@ -23,12 +22,4 @@ app.use(router)
 
 app.listen(port, () => {
    console.log('Server is running')
-})
-
-const server = express() 
-
-server.set('etag', 'strong')
-
-server.use('/*', (req, res) => {
-   res.sendFile(path.join(__dirname, './build', 'index.html'))
 })
