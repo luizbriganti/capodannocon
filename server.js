@@ -44,8 +44,8 @@ server.use(jsonServer.rewriter({
 
 server.use('/api', jsonServer.router('db.json'));
 
-server.get('*', (req,res) =>{
-   res.sendFile(path.join(__dirname+'/build/index.html'));
+server.get('/*', (req,res) =>{
+   res.sendFile(path.join(__dirname,'./build','index.html'));
 });
 
 server.listen(port)
