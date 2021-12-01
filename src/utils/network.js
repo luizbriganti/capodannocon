@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-const baseURL = "/" //"http://localhost:3001/";
+const baseURL = "/api/" //"http://localhost:3001/";
 
 export const makeReq = async (url, errorMessage = '', options = {}) => {
   return fetch(url, options)
