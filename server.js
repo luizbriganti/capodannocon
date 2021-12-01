@@ -46,7 +46,11 @@ server.use('/api', jsonServer.router('db.json'));
 
 server.use(express.static(path.join(__dirname, './build')));
 
-server.get('/*', (req,res) =>{
+server.get('/', (req,res) =>{
+   res.sendFile(path.join(__dirname,'./build','index.html'));
+});
+
+server.get('*', (req,res) =>{
    res.sendFile(path.join(__dirname,'./build','index.html'));
 });
 
