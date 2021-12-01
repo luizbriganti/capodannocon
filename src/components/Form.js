@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from '@mdi/react'
 import { mdiClose } from '@mdi/js'
 import SweetAlert from 'react-bootstrap-sweetalert';
+import Sorter from './Sorter';
 
 class Form extends Component {
   static propTypes = {
@@ -53,7 +54,10 @@ class Form extends Component {
 
     return (
       <>
-        <button type="button" onClick={() => this.setState({showForm: !showForm})} className="btn btn-primary add-event">Aggiungi evento</button>
+        <div className="list-actions">
+          <button type="button" onClick={() => this.setState({showForm: !showForm})} className="btn btn-primary add-event">Aggiungi evento</button>
+          <Sorter filter={this.props.filter} />
+        </div>
 
         {
           showForm ?

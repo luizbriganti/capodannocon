@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-const baseURL = "/api/";
+const baseURL = "/" //"http://localhost:3001/";
 
 export const makeReq = async (url, errorMessage = '', options = {}) => {
   return fetch(url, options)
@@ -17,6 +17,12 @@ export const getAll = () => {
   const errorMessage = 'Errore durante il download dei dati';
   return makeReq(`${baseURL}events`, errorMessage);
 };
+
+export const filterEvent = (date) => {
+  const errorMessage = 'Errore durante il download dei dati'
+  
+  return makeReq(`${baseURL}events?${date != 'null' ? `date=${date}` : ''}`, errorMessage)
+}
 
 export const getUsers = () => {
   const errorMessage = 'Errore durante il download dei dati';

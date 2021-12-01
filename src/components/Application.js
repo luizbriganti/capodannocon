@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import List from './List'
 import Form from './Form'
 import {v4 as uuid} from 'uuid'
-import { getAll, deleteEventFromTheServer, sendEventToTheServer } from '../utils/network'
+import { getAll, deleteEventFromTheServer, sendEventToTheServer, filterEvent } from '../utils/network'
 import { Navigate } from 'react-router'
 
 export default class Application extends Component {
@@ -44,6 +44,7 @@ export default class Application extends Component {
             this._isMounted && this.setState({events});
 
             sendEventToTheServer(event)
+                .then(() => this.get())
                 .catch(this.handleError);
         }
     }
@@ -71,10 +72,10 @@ export default class Application extends Component {
         this._isMounted = false
     }
     
-    async get(){
+    async get(filter = false){
         function compare( a, b ) {
-            const dateA = new Date(a.date).toLocaleDateString()
-            const dateB = new Date(b.date).toLocaleDateString()
+            const dateA = new Date(a.date)
+            const dateB = new Date(b.date)
     
             if ( dateA < dateB ){
                 return -1;
@@ -85,13 +86,32 @@ export default class Application extends Component {
             return 0;
         }
 
-        getAll()
+        !filter ?
+            (getAll()
             .then(data => {
                 const events = data.sort(compare)
 
                 this.setState({events: events})
             })
-            .catch(this.handleError);
+            .catch(this.handleError))
+        :
+            (filterEvent(filter)
+            .then(data => {
+                const events = data.sort(compare)
+
+                this.setState({events: events})
+            })
+            .catch(this.handleError))
+    }
+
+    filter(date){
+        const {events} = this.state 
+
+        if(date === 'null'){
+            this.get()
+        } else {
+            this.get(date)
+        }
     }
     
     render() {
@@ -102,8 +122,8 @@ export default class Application extends Component {
                 <>
                     <Navbar log={ this.props.log.bind(this) } user={this.props.user}/>  
                     <div className="container">
-                        <Form onSubmit={this.handleSubmit} />
-                        <List onDelete={ this.handleDelete } listItems={this.state.events} user={this.props.user} refresh={this.get.bind(this)} />
+                        <Form onSubmit={this.handleSubmit} filter={this.filter.bind(this)} />
+                        <List onDelete={ this.handleDelete } listItems={this.state.events} user={this.props.user} refresh={this.get.bind(this)}/>
                     </div>
                 </> :
                 <Navigate to="/login" />

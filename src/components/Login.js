@@ -16,6 +16,7 @@ export default class Login extends Component {
             hashedPass: false,
             users: [],
             error: '',
+            regError: false,
             emailSent: false,
             userAlert: false
         }
@@ -43,14 +44,14 @@ export default class Login extends Component {
             const user = this.state.users.filter(user => user.username === username)
 
             if(user.length === 0){
-                this._isMounted && this.setState({error: "Username non valido"})
+                this._isMounted && this.setState({regError: true, error: "Username non valido"})
             } else {
                 compareIt(password, user[0].password)
                 .then(res => {
                     if(res){
                         this.props.log({logStatus: true, user: user[0]})
                     } else {
-                        this._isMounted && this.setState({error: "Password errata"})
+                        this._isMounted && this.setState({regError: true, error: "Password errata"})
                     }
                 })
                 .then(_ => this._isMounted && this.setState({users: []}))
@@ -75,53 +76,74 @@ export default class Login extends Component {
 
         const {register_username, register_password, register_email} = e.target
 
-        //const formData = new FormData() 
-
-        const user = {
-            id: uuid(), 
-            username: register_username.value, 
-            password: register_password.value,
-            email: register_email.value,
-            role: 1, 
-            email_verified: uuid(),
-            created_at: new Date(), 
-            updated_at: new Date()
-        }
+        //const formData = new FormData()         
 
         getUsers()
         .then(data =>  {
+            let users 
 
-            const userOrEmail = data.filter(u => u.username === user.username || u.email === user.email)
+            if(register_username.value.indexOf(' ')  >= 0){
+                this._isMounted && this.setState({regError: true, error: 'Non puoi usare spazi nell\'username!'})
+                return users = false
+            }
+    
+            if(register_password.value.length < 8){
+                this._isMounted && this.setState({regError: true, error: 'La password deve avere almeno 8 caratteri!'})
+                return users = false
+            }
+    
+            if(register_password.value.indexOf(' ') >= 0){
+                this._isMounted && this.setState({regError: true, error: 'La password non può contenere spazi'})
+                return users = false
+            }
 
-            if(userOrEmail.length === 0){
-                hashIt(register_password.value)
-                .then(data => this.setState({hashedPass: data}))
-                .then(() => {
-                    /*const user = {
-                        id: uuid(), 
-                        username: register_username.value, 
-                        password: this.state.hashedPass, 
-                        email: register_email.value,
-                        role: 1, 
-                        email_verified: uuid(),
-                        created_at: new Date(), 
-                        updated_at: new Date()
-                    }*/
-
-                    const regUser = {...user, password: this.state.hashedPass}
-        
-                    setUser(regUser)
-                    .then(() => this.sendEmail(regUser))
-                    .then(() => this.setState({emailSent: true}))
-                })
-            } else {
-                this.setState({userAlert: true})
+            return users = data
+        })
+        .then(users => {
+            if(users){
+                const user = {
+                    id: uuid(), 
+                    username: register_username.value, 
+                    password: register_password.value,
+                    email: register_email.value,
+                    role: 1, 
+                    email_verified: uuid(),
+                    created_at: new Date(), 
+                    updated_at: new Date()
+                }
+    
+                const userOrEmail = users.filter(u => u.username === user.username || u.email === user.email)
+    
+                if(userOrEmail.length === 0){
+                    hashIt(register_password.value)
+                    .then(data => this.setState({hashedPass: data}))
+                    .then(() => {
+                        /*const user = {
+                            id: uuid(), 
+                            username: register_username.value, 
+                            password: this.state.hashedPass, 
+                            email: register_email.value,
+                            role: 1, 
+                            email_verified: uuid(),
+                            created_at: new Date(), 
+                            updated_at: new Date()
+                        }*/
+    
+                        const regUser = {...user, password: this.state.hashedPass}
+            
+                        setUser(regUser)
+                        .then(() => this.sendEmail(regUser))
+                        .then(() => this.setState({emailSent: true}))
+                    })
+                } else {
+                    this.setState({userAlert: true})
+                }
             }
         })
     }
 
     render() {
-        const {error} = this.state
+        const {error, regError} = this.state
         const {title, logStatus} = this.props
 
         return (        
@@ -142,8 +164,6 @@ export default class Login extends Component {
                             <label htmlFor="login-password"><strong>Password</strong></label>
                             <input type="password" id="login_password" required />
                         </div>
-
-                        {error}
 
                         <button className="btn btn-primary" type="submit">Login</button>
                     </form> 
@@ -175,6 +195,15 @@ export default class Login extends Component {
                     onConfirm={() => this.setState({emailSent: !this.state.emailSent})}         
                 >
                     <p>La tua registrazione è avvenuta con successo. Controlla la tua email e segui le istruzioni per verificare il tuo account.</p>
+                </SweetAlert>
+                <SweetAlert
+                    show={regError}
+                    showConfirm
+                    confirmBtnText="Ok"
+                    title="Attenzione!"
+                    onConfirm={() => this.setState({regError: false, error: ''})}         
+                >
+                    <p>{error}</p>
                 </SweetAlert>
                 <SweetAlert
                     show={this.state.userAlert}

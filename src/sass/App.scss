@@ -172,7 +172,6 @@ body{
         }
 
         &-meta{
-            background: red;
             @include flex(space-between, row wrap, center);
             position: absolute;
             top:0;
@@ -180,6 +179,22 @@ body{
             padding: 5px;
             box-sizing: border-box;
             width: 100%;
+
+            &.twentynine{
+                background: red;
+            }
+
+            &.thirty{
+                background: orange;
+            }
+
+            &.thirtyone{
+                background: lightseagreen;
+            }
+
+            &.one{
+                background: teal;
+            }
 
             span{
                 color: white;
@@ -280,4 +295,23 @@ body{
             }
         }
     }
+}
+
+.list-actions{
+    @include flex(space-between, row wrap, center);
+
+    .sorter{
+        & > span{
+            margin-right: 10px;
+        }
+    }
+
+    select{
+        padding: 8px;
+        box-sizing: border-box;
+    }
+}
+
+@media(max-width: 680px){
+    @import 'media/_680';
 }

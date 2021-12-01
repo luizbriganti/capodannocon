@@ -28,6 +28,19 @@ class ListItem extends Component {
     this.setState({detail: !this.state.detail})
   }
 
+  background(date){
+    switch(date){
+      case '2021-12-29':
+        return 'twentynine';
+      case '2021-12-30':
+        return 'thirty';
+      case '2021-12-31':
+        return 'thirtyone';
+      case '2022-01-01':
+        return 'one';
+    }
+  }
+
   render() {
     const item = this.props.item;
 
@@ -41,7 +54,7 @@ class ListItem extends Component {
       <>
         <li className="list__item" onClick={() => this.setState({detail: true})}>
           <div className="event-card card">
-            <div className="event-meta">
+            <div className={`event-meta ${this.background(item.date)}`}>
               <span className="date"><Icon path={mdiCalendar} size="15px" /> {hour}</span>
               <span className="slot"><Icon path={mdiClock} size="15px" /> {s}</span>
               <span className="author"><Icon path={mdiAccount} size="15px" /> {created_by}</span>
