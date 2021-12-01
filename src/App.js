@@ -72,8 +72,8 @@ class App extends Component {
       <>
         <Router>
           <Switch>
-            <Route exact path="/login" element={<Login title="You are not logged in :(" log={this.log.bind(this)} logStatus={logStatus} /> } />
             <Route exact path="/" element={<div><Application log={this.log.bind(this)} logStatus={logStatus} user={this.state.currentUser}/></div>} />
+            <Route path="/login" element={<Login title="You are not logged in :(" log={this.log.bind(this)} logStatus={logStatus} /> } />
             <Route path="/verify/*" element={<VerifyEmail log={this.log.bind(this)} />} />
           </Switch>
         </Router>
