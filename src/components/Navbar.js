@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export default class Navbar extends Component {
 
@@ -15,6 +16,7 @@ export default class Navbar extends Component {
                     </div>  
                     <nav className="main-navigation" role="navigation">
                         <ul>
+                            {this.props.user.role === 0 ? <Link to="/users" /> : ''}                            
                             <li onClick={() => this.logout() }>Ciao <strong>{this.props.user.username}</strong>! <span>Logout</span></li>
                         </ul>
                     </nav>

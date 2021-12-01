@@ -11,6 +11,8 @@ import {
 } from 'react-router-dom'
 import VerifyEmail from './components/VerifyEmail';
 import SweetAlert from 'react-bootstrap-sweetalert'
+import Users from './components/Users';
+import Page404 from './components/Page404';
 
 class App extends Component {
   constructor(props) {
@@ -75,6 +77,7 @@ class App extends Component {
             <Route exact path="/" element={<div><Application log={this.log.bind(this)} logStatus={logStatus} user={this.state.currentUser}/></div>} />
             <Route path="/login" element={<Login title="You are not logged in :(" log={this.log.bind(this)} logStatus={logStatus} /> } />
             <Route path="/verify/*" element={<VerifyEmail log={this.log.bind(this)} />} />
+            <Route path="/users" element={currentUser.role === 0 ? <Users /> : <Page404 />} />
           </Switch>
         </Router>
         <SweetAlert

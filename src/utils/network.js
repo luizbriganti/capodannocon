@@ -148,3 +148,19 @@ export const deleteEventFromTheServer = (eventId) => {
     
   return makeReq(url, errorMessage, options);
 }
+
+export const deleteUser = (userId) => {
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-type': 'application/json',
+      'Accept': 'application/json'
+    }
+  }
+
+  const errorMessage = "Impossibile cancellare l'elemento dal server"
+
+  const url = `${baseURL}users/${userId}`
+
+  return makeReq(url, errorMessage, options)
+}
