@@ -31,6 +31,8 @@ const port = process.env.PORT || 8000;
 
 const server = express()
 
+app.use(express.static(path.join(__dirname, './build')));
+
 const middlewares = jsonServer.defaults(
    {
       static: './build'
