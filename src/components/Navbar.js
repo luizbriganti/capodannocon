@@ -16,7 +16,7 @@ export default class Navbar extends Component {
                     </div>  
                     <nav className="main-navigation" role="navigation">
                         <ul>
-                            {this.props.user.role === 0 ? <Link to="/users" /> : ''}                            
+                            {this.props.user.role === 0 ? <Link to="/users">Utenti</Link> : ''}                            
                             <li onClick={() => this.logout() }>Ciao <strong>{this.props.user.username}</strong>! <span>Logout</span></li>
                         </ul>
                     </nav>

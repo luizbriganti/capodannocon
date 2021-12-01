@@ -312,6 +312,24 @@ body{
     }
 }
 
+.users-container{
+    table{
+        width: 100%;
+
+        tbody, thead{
+            width: 100%;
+
+            tr{
+                width: 100%;
+                &:nth-child(odd){
+                    background: lightgray
+                }
+            }
+        }
+    }
+}
+
 @media(max-width: 680px){
     @import 'media/_680';
 }
+

@@ -13,7 +13,8 @@ export default class Application extends Component {
 
         this.state= {
             events: [],
-            error: ''
+            error: '',
+            usersTable: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)

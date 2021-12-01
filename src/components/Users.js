@@ -40,37 +40,41 @@ export default class Users extends Component {
         const {users, deletion, toDelete} = this.state
 
         return (
-            <div className="container users-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Azioni</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            users.length > 0 ?
-                            users.map(user => <tr key={user.id}>
-                                <td>{user.username}</td>
-                                <td>{user.email}</td>
-                                <td><button type="button" className="btn btn-danger" onClick={() => this.delete(user.id)}><Icon path={mdiTrashCan} size="20px" /></button></td>
-                            </tr>) : 
-                            ''
-                        }
-                    </tbody>
-                </table>
-                <SweetAlert
-                    show={deletion}
-                    showConfirm
-                    confirmBtnText="Ok"
-                    title="Attenzione!"
-                    onConfirm={() => deleteUser(toDelete).then(() => this.setState({deletion: false, toDelete: false})).then(() => this.get()) }         
-                >
-                    <p>Si è sicuri di voler cancellare questo utente? L'operazione non è reversibile.</p>
-                </SweetAlert>
-            </div>
+            <>
+                <Navbar log={ this.props.log.bind(this) } user={this.props.user}/>  
+
+                <div className="container users-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                users.length > 0 ?
+                                users.map(user => <tr key={user.id}>
+                                    <td>{user.username}</td>
+                                    <td>{user.email}</td>
+                                    <td><button type="button" className="btn btn-danger" onClick={() => this.delete(user.id)}><Icon path={mdiTrashCan} size="20px" /></button></td>
+                                </tr>) : 
+                                ''
+                            }
+                        </tbody>
+                    </table>
+                    <SweetAlert
+                        show={deletion}
+                        showConfirm
+                        confirmBtnText="Ok"
+                        title="Attenzione!"
+                        onConfirm={() => deleteUser(toDelete).then(() => this.setState({deletion: false, toDelete: false})).then(() => this.get()) }         
+                    >
+                        <p>Si è sicuri di voler cancellare questo utente? L'operazione non è reversibile.</p>
+                    </SweetAlert>
+                </div>
+            </>
         )
     }
 }
