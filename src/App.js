@@ -77,7 +77,7 @@ class App extends Component {
             <Route exact path="/" element={<div><Application log={this.log.bind(this)} logStatus={logStatus} user={this.state.currentUser}/></div>} />
             <Route path="/login" element={<Login title="You are not logged in :(" log={this.log.bind(this)} logStatus={logStatus} /> } />
             <Route path="/verify/*" element={<VerifyEmail log={this.log.bind(this)} />} />
-            <Route path="/users" element={currentUser.hasOwnProperty('role') && currentUser.role === 0 ? <Users /> : <Page404 />} />
+            <Route path="/users" element={currentUser.hasOwnProperty('role') && currentUser.role === 0 ? <Users log={this.log.bind(this)} /> : <Page404 />} />
           </Switch>
         </Router>
         <SweetAlert
