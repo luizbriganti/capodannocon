@@ -5,8 +5,7 @@ const jsonServer = require('json-server');
 const app = jsonServer.create();
 //const path = require('path');
 //const express = require('express');
-const dbRouter = jsonServer.router('./db.json');
-const router = jsonServer.router();
+const router = jsonServer.router('./db.json');
 const middlewares = jsonServer.defaults(
    {
       static: './build'
@@ -21,7 +20,6 @@ app.use(jsonServer.rewriter({
 }))
 
 app.use(router)
-app.use(dbRouter)
 
 app.listen(port, () => {
    console.log('Server is running')
