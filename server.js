@@ -31,8 +31,6 @@ const port = process.env.PORT || 8000;
 
 const server = express()
 
-app.use(express.static(path.join(__dirname, './build')));
-
 const middlewares = jsonServer.defaults(
    {
       static: './build'
@@ -45,6 +43,8 @@ server.use(jsonServer.rewriter({
 }))
 
 server.use('/api', jsonServer.router('db.json'));
+
+server.use(express.static(path.join(__dirname, './build')));
 
 server.get('/*', (req,res) =>{
    res.sendFile(path.join(__dirname,'./build','index.html'));
