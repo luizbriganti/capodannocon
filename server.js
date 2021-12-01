@@ -26,6 +26,7 @@ app.listen(port, () => {
 
 const jsonServer = require('json-server')
 const express = require('express')
+const path = require('path')
 const port = process.env.PORT || 8000;
 
 const server = express()
@@ -35,7 +36,7 @@ const middlewares = jsonServer.defaults(
       static: './build'
    }
 );
-server.use(middlewares)
+server.use('/api', middlewares)
 
 server.use(jsonServer.rewriter({   
    '/api/*': '/$1'
@@ -43,14 +44,8 @@ server.use(jsonServer.rewriter({
 
 server.use('/api', jsonServer.router('db.json'));
 
-server.get('/', (req, res) => {
-   res.send('root');
-})
+server.get('*', (req,res) =>{
+   res.sendFile(path.join(__dirname+'/build/index.html'));
+});
 
-server.get('/login', (req, res) => {
-   res.send('login');
-})
-
-server.get('/verify/*', (req, res) => {
-   res.send('verify');
-})
+server.listen(port)
