@@ -3,6 +3,7 @@ import { deleteUser, getUsers } from '../utils/network'
 import Icon from '@mdi/react'
 import { mdiTrashCan } from '@mdi/js'
 import SweetAlert from 'react-bootstrap-sweetalert';
+import Navbar from './Navbar';
 
 export default class Users extends Component {
     constructor(props){
