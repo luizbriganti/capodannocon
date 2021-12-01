@@ -44,7 +44,7 @@ export default class VerifyEmail extends Component {
 
         return (
             verified ? 
-            <Navigate to={appURL} /> :
+            <Navigate to="/" /> :
             (
                 error ?
                 error : 

@@ -13,10 +13,12 @@ const port = process.env.PORT || 8000;
 app.use(middlewares);
 
 app.use(jsonServer.rewriter({
-   '/api/*': '/$1',
-   '/verify/*': '/verify/$1',
-   '/*': '/$1'
+   '/api/*': '/$1'
 }))
+
+app.get('/*', (req, res) => {
+   res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 
 app.use(router)
 
